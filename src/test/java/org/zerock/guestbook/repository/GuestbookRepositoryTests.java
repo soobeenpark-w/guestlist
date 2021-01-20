@@ -53,15 +53,15 @@ public class GuestbookRepositoryTests {
 
         Pageable pageable = PageRequest.of(0, 10, Sort.by("gno").descending());
 
-        QGuestbook qGuestbook = QGuestbook.guestbook; // 1
+        QGuestbook qGuestbook = QGuestbook.guestbook;
 
         String keyword = "1";
 
-        BooleanBuilder builder = new BooleanBuilder(); // 2
+        BooleanBuilder builder = new BooleanBuilder();
 
-        BooleanExpression expression = qGuestbook.title.contains(keyword); // 3
+        BooleanExpression expression = qGuestbook.title.contains(keyword);
 
-        builder.and(expression); // 4
+        builder.and(expression);
 
         Page<Guestbook> result = guestbookRepository.findAll(builder, pageable);
 
