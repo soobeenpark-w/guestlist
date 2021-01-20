@@ -10,6 +10,9 @@
         <form action="/guestbook/modify" method="post">
             <!-- Page Number -->
             <input type="hidden" name="page" th:value="${requestDTO.page}">
+            <!-- Search Queries to retain -->
+            <input type="hidden" name="type" th:value="${requestDTO.type}">
+            <input type="hidden" name="keyword" th:value="${requestDTO.keyword}">
 
             <div class="form-group">
                 <label >Gno</label>
@@ -61,15 +64,20 @@
 
             // List
             $(".listBtn").click(function() {
-                var pageInfo = $("input[name='page']");
+                var page = $("input[name='page']");
+                var type = $("input[name='type']");
+                var keyword = $("input[name='keyword']");
 
                 actionForm.empty();             // Delete all tags in form
-                actionForm.append(pageInfo);    // Reattach tags that are needed for navigation (ie. pageInfo)
+
+                // Reattach tags that are needed for navigation (ie. page, type, keyword)
+                actionForm.append(page);
+                actionForm.append(type);
+                actionForm.append(keyword);
+
                 actionForm
                     .attr("action", "/guestbook/list")
                     .attr("method", "get");
-
-                // console.log(actionForm.html());
                 actionForm.submit();
             });
 
